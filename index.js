@@ -1,22 +1,56 @@
-const product = [
+
+const contacts = [
    {
       id: 1,
-      name: "iPhone 16",
-      price: 100
+      fullname: "Andreas Amba",
+      phone: +6289661456234,
+      email: "andreas.amba@gmail.com",
+      addresses: [
+         {
+           country: 'Indonesia',
+           city: 'Bandung',
+           postalCode: '12345',
+           street: 'Jl. Cihampelas',
+         },
+       ],
    },
    {
       id: 2,
-      name: "iPhone 18",
-      price: 200
-   }
+      fullname: "Hinata Zom",
+      phone: +62896613451,
+      email: "hinata@gmail.com",
+      addresses: [
+         {
+           country: 'Indonesia',
+           city: 'Jakarta',
+           postalCode: '12345',
+           street: 'Jl. Kemang',
+         },
+       ],
+   },
+   {
+      id: 3,
+      fullname: "Numata Zhaira",
+      phone: 100,
+      email: "numata@gmail.com",
+      addresses: [
+         {
+           country: 'Indonesia',
+           city: 'Malang',
+           postalCode: '12345',
+           street: 'Jl. Merjosari',           
+         },
+       ],
+   },
+   
 ];
 
+const printUser = (contact) => {
+   return 'Name: ' + contact.fullname + '\n Email: ' + contact.email + '\n'
+}
 
-// console.log(product);
-
-const dataA = () => "Remmote";
-const gradeScore = (score) => (score > 90 ? "Great" : "Good");
-console.log(dataA);
-console.log(gradeScore(90));
+contacts.forEach (item =>
+   console.log(printUser(item))
+)
 
 
