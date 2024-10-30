@@ -33,8 +33,8 @@ const setBaseContact = () => {
    } else {
      contacts.forEach((contact) => {
        const item = `
-         <tr id="/detail-contact/?id=${contact.id}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 hover:cursor-pointer">
-           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+         <tr id="/detail-contact/?id=${contact.id}" class="bg-white border-b hover:bg-gray-100 hover:cursor-pointer">
+           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
              <div>
                ${contact.fullName}
              </div>

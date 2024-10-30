@@ -78,31 +78,31 @@ function renderContactById() {
             </div>
             
             <div>
-              <button onclick="" id="btn-contact-edit" type="submit" class="text-white bg-stone-950 hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <button onclick="" id="btn-contact-edit" type="submit" class="text-white bg-stone-950 hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                 Edit
               </button>
   
-              <button onclick="renderDeleteContactById(${contact.id})" id="btn-contact-remove" type="submit" class="text-black bg-stone-100 hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <button onclick="renderDeleteContactById(${contact.id})" id="btn-contact-remove" type="submit" class="text-black bg-stone-100 hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                 Remove
               </button>
             </div>
           </div>
           <div class="p-8 rounded-xl bg-gray-100">
               <div class="mb-4">
-                <p class="block mb-0 text-md font-medium text-gray-900 dark:text-white">Email</p>
-                <p class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">${contact.email}</p>
+                <p class="block mb-0 text-md font-medium text-gray-900">Email</p>
+                <p class="block mb-2 text-sm font-medium text-gray-700">${contact.email}</p>
               </div>
               <div class="mb-4">
-                <p class="block mb-0 text-md font-medium text-gray-900 dark:text-white">Phone Number</p>
-                <p class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">${contact.phoneNumber}</p>
+                <p class="block mb-0 text-md font-medium text-gray-900">Phone Number</p>
+                <p class="block mb-2 text-sm font-medium text-gray-700">${contact.phoneNumber}</p>
               </div>
               <div class="mb-4">
-                <p class="block mb-0 text-md font-medium text-gray-900 dark:text-white">Company</p>
-                <p class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">${contact.company}</p>
+                <p class="block mb-0 text-md font-medium text-gray-900">Company</p>
+                <p class="block mb-2 text-sm font-medium text-gray-700">${contact.company}</p>
               </div>
               <div class="mb-4">
-                <p class="block mb-0 text-md font-medium text-gray-900 dark:text-white">Label</p>
-                <p class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">${contact.label}</p>
+                <p class="block mb-0 text-md font-medium text-gray-900">Label</p>
+                <p class="block mb-2 text-sm font-medium text-gray-700">${contact.label}</p>
               </div>
           </div>
     `;
