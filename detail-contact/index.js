@@ -4,8 +4,6 @@ const globalVariable = 1;
 function getCurrentPageDetailById() {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
-    console.log("this query string: "+queryString);
-    console.log("this params: "+params);
 
     const id = Number(params.get("id"));
 

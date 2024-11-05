@@ -1,38 +1,54 @@
 const setBaseContact = () => {
-   const contacts = getContacts();
- 
-   if(contacts.length === 0) {
-     setContacts(basesContact);
-   }
- };
- 
- const checkContact = () => {
-   const trs = document.getElementById("contactsTableBody").getElementsByTagName("tr");
- 
-   for (tr of trs) {
-     const link = tr.getAttribute("id");
-     document.getElementById(link).addEventListener('click', () => {
-       window.location.replace(link);
-     });
-   }
- };
- 
- const renderData = () => {
-   const contacts = getContacts();
- 
-   console.log(contacts.length);
- 
-   const contactsTableBody = document.getElementById("contactsTableBody");
-   contactsTableBody.innerHTML = "";
- 
-   if(contacts.length == 0) {
-     const item = `
+  const contacts = getContacts();
+
+  if (contacts.length === 0) {
+    setContacts(basesContact);
+  }
+};
+
+const checkContact = () => {
+  const trs = document
+    .getElementById("contactsTableBody")
+    .getElementsByTagName("tr");
+
+  for (tr of trs) {
+    const link = tr.getAttribute("id");
+    document.getElementById(link).addEventListener("click", () => {
+      window.location.replace(link);
+    });
+  }
+};
+
+const searchContacts = (contacts, keyword) => {
+  const searchedContact = contacts.filter((contact) => {
+    return contact.fullName.toLowerCase().includes(keyword.toLowerCase());
+  });
+  return searchedContact;
+};
+
+const renderData = () => {
+  const seachKeywordForElement = document.getElementById("search-input");
+  const searchParams = new URLSearchParams(window.location.search);
+  const keyword = searchParams.get("key");
+  seachKeywordForElement.value = keyword;
+
+  const contacts = getContacts();
+
+  const contactsToDisplay = keyword
+    ? searchContacts(contacts, keyword)
+    : contacts;
+
+  const contactsTableBody = document.getElementById("contactsTableBody");
+  contactsTableBody.innerHTML = "";
+
+  if (contactsToDisplay.length == 0) {
+    const item = `
        <div class="flex items-center max-w-full p-10">Data not found</div>
      `;
-     contactsTableBody.innerHTML = item;
-   } else {
-     contacts.forEach((contact) => {
-       const item = `
+    contactsTableBody.innerHTML = item;
+  } else {
+    contactsToDisplay.forEach((contact) => {
+      const item = `
          <tr id="/detail-contact/?id=${contact.id}" class="bg-white border-b hover:bg-gray-100 hover:cursor-pointer">
            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
              <div>
@@ -61,16 +77,16 @@ const setBaseContact = () => {
            </td>
          </tr>
        `;
-       contactsTableBody.innerHTML += item;
-     });
-   }
-   checkContact();
- };
- 
- const renderContactDetailDialog = (id) => {
-   const profileDetailDialog = document.getElementById("contact-dialog");
-   const contact = loadContactById(id);
-   const elementDetail = `
+      contactsTableBody.innerHTML += item;
+    });
+  }
+  checkContact();
+};
+
+const renderContactDetailDialog = (id) => {
+  const profileDetailDialog = document.getElementById("contact-dialog");
+  const contact = loadContactById(id);
+  const elementDetail = `
      <form id="delete-contact-form">
        <h1 class="text-3xl">Delete from contacts?</h1>
        <input id="delete-contact-id" name="id" type="hidden" required />
@@ -94,17 +110,19 @@ const setBaseContact = () => {
        </div>
      </form>
    `;
-   profileDetailDialog.innerHTML = elementDetail;
- 
-   const btnCloseContactDialog = document.getElementById("close-btn-contact-dialog");
-   btnCloseContactDialog.addEventListener('click', () => {
-     profileDetailDialog.close();
-   });
- };
- 
- const createProfileDetailDialog = () => {
-   const profileDetailDialog = document.getElementById("addContactDialog");
-   const addNewContactForm = `
+  profileDetailDialog.innerHTML = elementDetail;
+
+  const btnCloseContactDialog = document.getElementById(
+    "close-btn-contact-dialog"
+  );
+  btnCloseContactDialog.addEventListener("click", () => {
+    profileDetailDialog.close();
+  });
+};
+
+const createProfileDetailDialog = () => {
+  const profileDetailDialog = document.getElementById("addContactDialog");
+  const addNewContactForm = `
      <div class="p-0 rounded-md">
        <div class="mb-4">
          <h1 class="text-3xl">Add new contact</h1>
@@ -130,57 +148,59 @@ const setBaseContact = () => {
        </form>    
      </div>
    `;
- 
-   profileDetailDialog.innerHTML = addNewContactForm;
-   
- };
- 
- const initListener = () => {
-   const btnAddContact = document.getElementById("btn-add-contact");
-   const addContactDialog = document.getElementById("new-contact-dialog");
-   const btnNewContactClose = document.getElementById("new-contact-dialog-btn-close");
-   const newContactForm = document.getElementById("new-contact-form");
- 
-   btnAddContact.addEventListener('click', () => {
-     addContactDialog.showModal();
-   });
- 
-   btnNewContactClose.addEventListener('click', () => {
-     addContactDialog.close();
-   });
- 
-   newContactForm.addEventListener("submit", (event) => {
-     event.preventDefault();
- 
-     const contactFormData = new FormData(newContactForm);
- 
-     const currentContacts = getContacts();
-     const newId = currentContacts.length ? currentContacts[currentContacts.length - 1].id + 1 : 1;
- 
-     const newContact = new Contact(
-       id = newId,
-       fullName = contactFormData.get("full-name"),
-       email = contactFormData.get("email"),
-       phoneNumber = contactFormData.get("phone-number"),
-       company = contactFormData.get("company"),
-       label = "FRIEND"
-     );
- 
-     // Update by adding a new object in the array
-     const updatedContacts = [...currentContacts, newContact];
- 
-     setContacts(updatedContacts);
-     newContactForm.reset();
-     addContactDialog.close();
-     renderData();
-   });
- };
- 
- 
- function getContactByLabel() {
-   const contacts = getContacts();
-   const contactFiltered = contacts.filter
- }
- setBaseContact();
- initListener();
- renderData();
+
+  profileDetailDialog.innerHTML = addNewContactForm;
+};
+
+const initListener = () => {
+  const btnAddContact = document.getElementById("btn-add-contact");
+  const addContactDialog = document.getElementById("new-contact-dialog");
+  const btnNewContactClose = document.getElementById(
+    "new-contact-dialog-btn-close"
+  );
+  const newContactForm = document.getElementById("new-contact-form");
+
+  btnAddContact.addEventListener("click", () => {
+    addContactDialog.showModal();
+  });
+
+  btnNewContactClose.addEventListener("click", () => {
+    addContactDialog.close();
+  });
+
+  newContactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const contactFormData = new FormData(newContactForm);
+
+    const currentContacts = getContacts();
+    const newId = currentContacts.length
+      ? currentContacts[currentContacts.length - 1].id + 1
+      : 1;
+
+    const newContact = new Contact(
+      (id = newId),
+      (fullName = contactFormData.get("full-name")),
+      (email = contactFormData.get("email")),
+      (phoneNumber = contactFormData.get("phone-number")),
+      (company = contactFormData.get("company")),
+      (label = "FRIEND")
+    );
+
+    // Update by adding a new object in the array
+    const updatedContacts = [...currentContacts, newContact];
+
+    setContacts(updatedContacts);
+    newContactForm.reset();
+    addContactDialog.close();
+    renderData();
+  });
+};
+
+function getContactByLabel() {
+  const contacts = getContacts();
+  const contactFiltered = contacts.filter;
+}
+setBaseContact();
+initListener();
+renderData();
