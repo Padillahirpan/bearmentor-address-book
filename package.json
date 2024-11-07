@@ -1,0 +1,16 @@
+{
+  "name": "address-book",
+  "version": "1.0.0",
+  "description": "This is an address book project that shown list of contact information.",
+  "main": "index.js",
+  "scripts": {
+    "tailwind:watch": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/index.css --watch",
+    "tailwind:build": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/index.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}
